@@ -1,6 +1,13 @@
 var memoize = require('memoizee');
 var _ = require('lodash');
 const socksProxyAgent = require( 'socks-proxy-agent' );
+const os = require( 'os' );
+
+var buildUserAgent = function() {
+  const ptString = nw.App.manifest.name + '/' + nw.App.manifest.version;
+  const osString = os.platform() + ' ' + os.arch() + ' ' + os.release();
+  return ptString + ' (' + osString + ')';
+}
 
 var processArgs = function(config, args) {
   var newArgs = {};
@@ -62,6 +69,7 @@ class Provider {
     );
 
     if (args.apiURL) { this.setApiUrls(args.apiURL); }
+    this.userAgent = buildUserAgent();
   };
 
   async _get(index, uri) {
@@ -92,8 +100,7 @@ class Provider {
   {
     let options = {
       headers: {
-        'User-Agent':
-            'Mozilla/5.0 (Linux) AppleWebkit/534.30 (KHTML, like Gecko) PT/4.4.0'
+        'User-Agent': this.userAgent,
       }
     };
 
@@ -107,6 +114,8 @@ class Provider {
       baseUrl = `${match[1]}://cloudflare.com/`;
       options.headers.Host = match[2];
     }
+
+    options.headers = new Headers(options.headers);
 
     return {
       url: baseUrl + uri,
