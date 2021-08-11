@@ -97,8 +97,8 @@
     "trakt.tv-ondeck": "7.x.x",
     "underscore": "^1.13.0",
     "urijs": "^1.19.7",
-    "video.js": "4.11.4",
-    "videojs-youtube": "1.2.10",
+    "video.js": "^7.14.3",
+    "videojs-youtube": "^2.6.1",
     "webtorrent": "^1.5.8",
     "webtorrent-health": "1.x.x"
   },
