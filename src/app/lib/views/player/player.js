@@ -242,8 +242,6 @@
             if (type === 'episode') {
                 type = 'show';
             }
-            console.log('====');
-            console.log(this.video);
             if (this.video.currentTime() / this.video.duration() >= 0.8 && type !== undefined && this.model.get('metadataCheckRequired') !== false) {
                 App.vent.trigger(type + ':watched', this.model.attributes, 'database');
             }
@@ -510,7 +508,7 @@
                 this.video = videojs($('#video_player').get(0), {
                     techOrder: ['youtube'],
                     forceSSL: true,
-                    ytcontrols: true,
+                    ytcontrols: false,
                     quality: '720p',
                 });
                 this.video.ready(function () {
@@ -539,13 +537,14 @@
                     });
 
             } else {
-                this.video = videojs('video_player', {
+                this.video = videojs($('#video_player').get(0), {
                     nativeControlsForTouch: false,
                     trackTimeOffset: 0,
+                    //inactivityTimeout: 2000,
                     plugins: {
-                        biggerSubtitle: {},
-                        smallerSubtitle: {},
-                        customSubtitles: {},
+                        //biggerSubtitle: {},
+                        //smallerSubtitle: {},
+                        //customSubtitles: {},
                         progressTips: {}
                     }
                 });
@@ -554,7 +553,7 @@
                 });
                 $('head > title').text(this.model.get('title') + ' - Popcorn-Time' );
             }
-            this.player = this.video;//.player();
+            this.player = this.video;
             App.PlayerView = this;
 
             /* The following is a hack to make VideoJS listen to
