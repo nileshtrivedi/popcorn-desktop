@@ -539,12 +539,13 @@
             } else {
                 this.video = videojs('video_player', {
                     nativeControlsForTouch: false,
+                    nativeTextTracks: false,
                     trackTimeOffset: 0,
                     //inactivityTimeout: 2000,
                     plugins: {
                         //biggerSubtitle: {},
                         //smallerSubtitle: {},
-                        //customSubtitles: {},
+                        customSubtitles: {},
                     }
                 });
                 this.video.ready(function () {
