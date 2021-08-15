@@ -545,7 +545,7 @@
                         //biggerSubtitle: {},
                         //smallerSubtitle: {},
                         //customSubtitles: {},
-                        progressTips: {}
+                        //progressTips: {}
                     }
                 });
                 this.video.ready(function () {
