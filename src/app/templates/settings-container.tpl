@@ -573,7 +573,7 @@
             <span>
                 <div class="opensubtitles-options">
                     <p><%= i18n.__("Movies API Server(s)") %></p>
-                    <input type="text" size="61" id="customMoviesServer" name="customMoviesServer" list="moviesServers" value="<%= Settings.customMoviesServer %>" placeholder="<%= Settings.providers.movie.uri[0].split('apiURL=').pop().split('/,')[0] %>&nbsp;&nbsp;(default)">
+                    <input type="text" size="61" id="customMoviesServer" name="customMoviesServer" list="moviesServers" value="<%= Settings.customMoviesServer %>" placeholder="<%= Settings.dhtInfo ? 'use dht: ' + Settings.dhtInfo.server : '' %>">
                     <datalist id="moviesServers">
                         <% if (Settings.customServers && Settings.customServers.movie) {
                             for (var i = 0; i < Settings.customServers.movie.length; ++i) {
@@ -587,7 +587,7 @@
             <span>
                 <div class="opensubtitles-options">
                     <p><%= i18n.__("Series API Server(s)") %></p>
-                    <input type="text" size="61" id="customSeriesServer" name="customSeriesServer" list="seriesServers" value="<%= Settings.customSeriesServer %>" placeholder="<%= Settings.providers.tvshow.uri[0].split('apiURL=').pop().split('/,')[0] %>&nbsp;&nbsp;(default)">
+                    <input type="text" size="61" id="customSeriesServer" name="customSeriesServer" list="seriesServers" value="<%= Settings.customSeriesServer %>" placeholder="<%= Settings.dhtInfo ? 'use dht: ' + Settings.dhtInfo.server : '' %>">
                     <datalist id="seriesServers">
                         <% if (Settings.customServers && Settings.customServers.tvshow) {
                             for (var i = 0; i < Settings.customServers.tvshow.length; ++i) {
@@ -601,7 +601,7 @@
             <span>
                 <div class="opensubtitles-options">
                     <p><%= i18n.__("Anime API Server(s)") %></p>
-                    <input type="text" size="61" id="customAnimeServer" name="customAnimeServer" list="animeServers" value="<%= Settings.customAnimeServer %>" placeholder="<%= Settings.providers.anime.uri[0].split('apiURL=').pop().split('/,')[0] %>&nbsp;&nbsp;(default)">
+                    <input type="text" size="61" id="customAnimeServer" name="customAnimeServer" list="animeServers" value="<%= Settings.customAnimeServer %>" placeholder="<%= Settings.dhtInfo ? 'use dht: ' + Settings.dhtInfo.server : '' %>">
                     <datalist id="animeServers">
                         <% if (Settings.customServers && Settings.customServers.anime) {
                             for (var i = 0; i < Settings.customServers.anime.length; ++i) {
