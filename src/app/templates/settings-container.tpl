@@ -573,15 +573,13 @@
             <span>
                 <div class="opensubtitles-options">
                     <p><%= i18n.__("Movies API Server(s)") %></p>
-                    <input type="text" size="61" id="customMoviesServer" name="customMoviesServer" list="moviesServers" value="<%= Settings.customMoviesServer ? Settings.customMoviesServer : (Settings.dhtEnable && Settings.dhtData ? Settings.dhtData.split('server":"')[1].split('","git":"')[0] : Settings.providers.movie.uri[0].split('=')[1]) %>">
+                    <input type="text" size="61" id="customMoviesServer" name="customMoviesServer" list="moviesServers" value="<%= Settings.customMoviesServer %>" placeholder="<%= Settings.providers.movie.uri[0].split('apiURL=').pop().split('/,')[0] %>&nbsp;&nbsp;(default)">
                     <datalist id="moviesServers">
-                        <% var movieServList = [Settings.providers.movie.uri[0].split('=')[1].replace(/,/g, ',  ')];
-                           Settings.customServers && Settings.customServers.movie ? movieServList = movieServList.concat(Settings.customServers.movie) : null;
-                           Settings.dhtData ? movieServList = movieServList.concat([Settings.dhtData.split('server":"')[1].split('","git":"')[0].replace(/,/g, ',  ')]) : null;
-                           for (var i = 0; i < movieServList.length; ++i) {
+                        <% if (Settings.customServers && Settings.customServers.movie) {
+                            for (var i = 0; i < Settings.customServers.movie.length; ++i) {
                         %>
-                        <option value="<%= movieServList[i] %>">
-                        <% } %>
+                        <option value="<%= Settings.customServers.movie[i] %>">
+                        <% }} %>
                     </datalist>
                     <i class="update-dht fa fa-redo tooltipped" data-toggle="tooltip" data-placement="auto" title="<%= i18n.__("Check for updates") %>"></i>
                 </div>
@@ -589,15 +587,13 @@
             <span>
                 <div class="opensubtitles-options">
                     <p><%= i18n.__("Series API Server(s)") %></p>
-                    <input type="text" size="61" id="customSeriesServer" name="customSeriesServer" list="seriesServers" value="<%= Settings.customSeriesServer ? Settings.customSeriesServer : (Settings.dhtEnable && Settings.dhtData ? Settings.dhtData.split('server":"')[1].split('","git":"')[0] : Settings.providers.tvshow.uri[0].split('=')[1]) %>">
+                    <input type="text" size="61" id="customSeriesServer" name="customSeriesServer" list="seriesServers" value="<%= Settings.customSeriesServer %>" placeholder="<%= Settings.providers.tvshow.uri[0].split('apiURL=').pop().split('/,')[0] %>&nbsp;&nbsp;(default)">
                     <datalist id="seriesServers">
-                        <% var seriesServList = [Settings.providers.tvshow.uri[0].split('=')[1].replace(/,/g, ',  ')];
-                           Settings.customServers && Settings.customServers.tvshow ? seriesServList = seriesServList.concat(Settings.customServers.tvshow) : null;
-                           Settings.dhtData ? seriesServList = seriesServList.concat([Settings.dhtData.split('server":"')[1].split('","git":"')[0].replace(/,/g, ',  ')]) : null;
-                           for (var i = 0; i < seriesServList.length; ++i) {
+                        <% if (Settings.customServers && Settings.customServers.tvshow) {
+                            for (var i = 0; i < Settings.customServers.tvshow.length; ++i) {
                         %>
-                        <option value="<%= seriesServList[i] %>">
-                        <% } %>
+                        <option value="<%= Settings.customServers.tvshow[i] %>">
+                        <% }} %>
                     </datalist>
                     <i class="update-dht fa fa-redo tooltipped" data-toggle="tooltip" data-placement="auto" title="<%= i18n.__("Check for updates") %>"></i>
                 </div>
@@ -605,15 +601,13 @@
             <span>
                 <div class="opensubtitles-options">
                     <p><%= i18n.__("Anime API Server(s)") %></p>
-                    <input type="text" size="61" id="customAnimeServer" name="customAnimeServer" list="animeServers" value="<%= Settings.customAnimeServer ? Settings.customAnimeServer : (Settings.dhtEnable && Settings.dhtData ? Settings.dhtData.split('server":"')[1].split('","git":"')[0] : Settings.providers.anime.uri[0].split('=')[1]) %>">
+                    <input type="text" size="61" id="customAnimeServer" name="customAnimeServer" list="animeServers" value="<%= Settings.customAnimeServer %>" placeholder="<%= Settings.providers.anime.uri[0].split('apiURL=').pop().split('/,')[0] %>&nbsp;&nbsp;(default)">
                     <datalist id="animeServers">
-                        <% var animeServList = [Settings.providers.anime.uri[0].split('=')[1].replace(/,/g, ',  ')];
-                           Settings.customServers && Settings.customServers.anime ? animeServList = animeServList.concat(Settings.customServers.anime) : null;
-                           Settings.dhtData ? animeServList = animeServList.concat([Settings.dhtData.split('server":"')[1].split('","git":"')[0].replace(/,/g, ',  ')]) : null;
-                           for (var i = 0; i < animeServList.length; ++i) {
+                        <% if (Settings.customServers && Settings.customServers.anime) {
+                            for (var i = 0; i < Settings.customServers.anime.length; ++i) {
                         %>
-                        <option value="<%= animeServList[i] %>">
-                        <% } %>
+                        <option value="<%= Settings.customServers.anime[i] %>">
+                        <% }} %>
                     </datalist>
                     <i class="update-dht fa fa-redo tooltipped" data-toggle="tooltip" data-placement="auto" title="<%= i18n.__("Check for updates") %>"></i>
                 </div>
