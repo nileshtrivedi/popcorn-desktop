@@ -102,11 +102,7 @@
                 <% }); %>
             </div>
         </div>
-        <% if (Settings.activateSeedbox) { %>
-        <div class="sd-overview" style="min-width:480px">
-        <% } else { %>
         <div class="sd-overview">
-        <% } %>
             <div class="sdo-infos">
                 <div class="sdoi-title"></div>
                 <div class="sdoi-links">
@@ -120,8 +116,10 @@
                 </div>
                 <div class="sdoi-synopsis"></div>
             </div>
+            <div id="torrent-list"></div>
             <div class="sdo-watch">
                 <div id="quality-selector"></div>
+                <div id="show-all-torrents" class="button show-all-torrents"><%=i18n.__("More") %></div>
                 <div class="sdow-watchnow">
                     <div id="player-chooser"></div>
                 </div>
@@ -130,6 +128,7 @@
                 <% } %>
             </div>
         </div>
+        <div class="sd-torrents" id="torrent-show-list"></div>
     </section>
 
 </div>
