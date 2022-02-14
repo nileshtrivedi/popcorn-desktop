@@ -1,3 +1,22 @@
+## 0.4.7 - The reports of my death are greatly exaggerated - 13 February 2022
+
+New Features:
+- Add Play/Download functions to the Seedbox and various other right pane fixes and additions
+- Add ability of updating the API server urls using DHT
+- Add a link for contributing media information to TMDB
+- Show torrent list for current media
+- Add more languages
+
+Bug Fixes:
+- Fix the Rebuild bookmarks database function
+- Fix the incorrect sorting/filtering of bookmarks when more than 50
+
+Other:
+- Update torrent trackers
+- Update various modules/dependencies
+- Update WebTorrent to 1.5.8
+- Various other small fixes and optimizations
+
 ## 0.4.6 - The Good Variant - 11 October 2021
 
 New Features:
