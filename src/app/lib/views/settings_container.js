@@ -50,7 +50,8 @@
             'click .update-dht': 'updateDht',
             'mousedown #customMoviesServer': 'showFullDatalist',
             'mousedown #customSeriesServer': 'showFullDatalist',
-            'mousedown #customAnimeServer': 'showFullDatalist'
+            'mousedown #customAnimeServer': 'showFullDatalist',
+            'mousedown #customBookServer': 'showFullDatalist'
         },
 
         onAttach: function () {
@@ -103,7 +104,7 @@
         rightclick_field: function (e) {
             e.preventDefault();
             var menu;
-            if (/customMoviesServer|customSeriesServer|customAnimeServer/.test(e.target.id)) {
+            if (/customMoviesServer|customSeriesServer|customAnimeServer|customBookServer/.test(e.target.id)) {
                 menu = new this.altcontext_Menu(i18n.__('Cut'), i18n.__('Copy'), i18n.__('Paste'), e.target.id);
             } else {
                 menu = new this.context_Menu(i18n.__('Cut'), i18n.__('Copy'), i18n.__('Paste'), e.target.id);
@@ -259,6 +260,7 @@
             switch (field.attr('name')) {
                 case 'customMoviesServer':
                 case 'customSeriesServer':
+                case 'customBookServer':
                 case 'customAnimeServer':
                     apiServerChanged = true;
                     value = field.val().replace(/\s+/g, '');
@@ -347,6 +349,7 @@
                 case 'multipleExtSubtitles':
                 case 'moviesTabEnable':
                 case 'seriesTabEnable':
+                case 'bookTabEnable':
                 case 'animeTabEnable':
                     value = field.is(':checked');
                     break;
@@ -426,7 +429,7 @@
             App.settings[field.attr('name')] = value;
 
             if (apiServerChanged) {
-                App.Providers.updateConnection(App.settings['customMoviesServer'], App.settings['customSeriesServer'], App.settings['customAnimeServer'], App.settings['proxyServer']);
+                App.Providers.updateConnection(App.settings['customMoviesServer'], App.settings['customSeriesServer'], App.settings['customAnimeServer'], App.settings['customBookServer'], App.settings['proxyServer']);
             }
 
             if (apiDataChanged) {
@@ -568,6 +571,14 @@
                         $('select[name=start_screen]').change();
                     }
                     break;
+                case 'bookTabEnable':
+                    App.vent.trigger('favorites:list');
+                    $('.nav-hor.left li:first').click();
+                    App.vent.trigger('settings:show');
+                    if (AdvSettings.get('startScreen') === 'Book') {
+                        $('select[name=start_screen]').change();
+                    }
+                    break;
                 case 'activateWatchlist':
                     $('.nav-hor.left li:first').click();
                     App.vent.trigger('settings:show');
@@ -623,6 +634,7 @@
                     break;
                 case 'customMoviesServer':
                 case 'customSeriesServer':
+                case 'customBookServer':
                 case 'customAnimeServer':
                     this.alertMessageSuccess(true);
                     break;

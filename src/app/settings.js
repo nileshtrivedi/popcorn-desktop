@@ -64,6 +64,12 @@ Settings.providers = {
     uri: [
     ]
   },
+  book: {
+    order: 4,
+    name: 'Book',
+    uri: [
+    ]
+  },
   subtitle: 'OpenSubtitles',
   metadata: 'Trakttv',
   torrentCache: 'TorrentCache'
@@ -96,6 +102,7 @@ Settings.trackers = {
 Settings.customMoviesServer = '';
 Settings.customSeriesServer = '';
 Settings.customAnimeServer = '';
+Settings.customBookServer = '';
 Settings.proxyServer = '';
 
 // User interface
@@ -140,6 +147,7 @@ Settings.defaultFilters = 'default';
 Settings.moviesTabEnable = true;
 Settings.seriesTabEnable = true;
 Settings.animeTabEnable = true;
+Settings.bookTabEnable = true;
 Settings.showSeedboxOnDlInit = true;
 Settings.showSubmitMeta = true;
 Settings.showUndoRBookmark = true;

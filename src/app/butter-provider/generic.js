@@ -163,7 +163,8 @@ Provider.ArgType = {
 Provider.TabType = {
   MOVIE: 'movie',
   TVSHOW: 'tvshow',
-  ANIME: 'anime'
+  ANIME: 'anime',
+  BOOK: 'book'
 };
 
 function warnDefault(fn, support) {

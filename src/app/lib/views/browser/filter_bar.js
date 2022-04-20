@@ -31,6 +31,7 @@
       'click .movieTabShow': 'movieTabShow',
       'click .tvshowTabShow': 'tvshowTabShow',
       'click .animeTabShow': 'animeTabShow',
+      'click .bookTabShow': 'bookTabShow',
       'click #filterbar-favorites': 'showFavorites',
       'click #filterbar-watchlist': 'showWatchlist',
       'click #filterbar-torrent-collection': 'showTorrentCollection',
@@ -108,6 +109,10 @@
         case 'Anime':
         case 'anime':
           $('.source.animeTabShow').addClass('active');
+          break;
+        case 'Book':
+        case 'book':
+          $('.source.bookTabShow').addClass('active');
           break;
         case 'Favorites':
         case 'favorites':
@@ -194,6 +199,9 @@
             break;
           case 'Anime':
             App.currentview = 'anime';
+            break;
+          case 'Book':
+            App.currentview = 'book';
             break;
           case 'Favorites':
             App.currentview = 'Favorites';
@@ -439,6 +447,16 @@
       App.vent.trigger('seedbox:close');
       App.vent.trigger('anime:list', []);
       this.setActive('Anime');
+    },
+
+    bookTabShow: function(e) {
+      e.preventDefault();
+      App.currentview = 'book';
+      App.vent.trigger('about:close');
+      App.vent.trigger('torrentCollection:close');
+      App.vent.trigger('seedbox:close');
+      App.vent.trigger('book:list', []);
+      this.setActive('Book');
     },
 
     movieTabShow: function(e) {
