@@ -12,6 +12,7 @@
 <div id="content"></div>
 <div id="settings-container"></div>
 <div id="movie-detail"></div>
+<div id="book-detail"></div>
 <div id="file-selector-container"></div>
 <div id="torrent-collection-container"></div>
 <div id="seedbox-container"></div>

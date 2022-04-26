@@ -44,6 +44,7 @@ class BookApi extends Generic {
             banner: 'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1562985482l/40796176._SY475_.jpg',
             fanart: 'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1562985482l/40796176._SY475_.jpg',
           },
+          poster: book.poster,
           mal_id: book._id,
           haru_id: book._id,
           tvdb_id: 'mal-' + book._id,
@@ -62,21 +63,26 @@ class BookApi extends Generic {
   }
 
   async getRaw(url) {
+    console.log("in getRaw(): 1");
     const response = await fetch(url);
+    console.log(response.ok);
     if (response.ok) {
-      return await response.json();
+      console.log("in getRaw(): 2");
+      return response.json();
     }
   }
 
   detail(torrent_id, old_data, debug) {
     const uri = `book/${torrent_id}`;
+    console.log(`fetching ${uri}`);
 
     return this.getRaw(`https://api.npoint.io/a896078eda06afe5e3c4`).then(book => {
+      console.log(JSON.stringify(book));
       var result = {
         mal_id: book._id,
         haru_id: book._id,
         tvdb_id: 'mal-' + book._id,
-        imdb_id: book._id,
+        imdb_id: book.imdb_id,
         slug: book.slug,
         title: book.title,
         item_data: book.type,
@@ -89,11 +95,7 @@ class BookApi extends Generic {
         synopsis: book.synopsis,
         network: [], //FIXME
         rating: book.rating,
-        images: {
-          poster: 'https://media.kitsu.io/book/poster_images/' + book._id + '/large.jpg',
-          banner: 'https://media.kitsu.io/book/cover_images/' + book._id + '/original.jpg',
-          fanart: 'https://media.kitsu.io/book/cover_images/' + book._id + '/original.jpg',
-        },
+        poster: book.poster,
         year: book.year,
         type: book.type
       };
