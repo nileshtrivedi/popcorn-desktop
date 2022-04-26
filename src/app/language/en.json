@@ -631,5 +631,12 @@
 	"KB/s": "KB/s",
 	"MB/s": "MB/s",
 	"Book API Server(s)": "Book API Server(s)",
-	"Book": "Book"
+	"Book": "Book",
+	"No book found...": "No book found...",
+	"The remote book API failed to respond, please check %s and try again later": "The remote book API failed to respond, please check %s and try again later",
+	"Mathematics": "Mathematics",
+	"Physics": "Physics",
+	"Fiction": "Fiction",
+	"Business": "Business",
+	"": ""
 }

@@ -7,7 +7,7 @@
         type: 'books',
         getProviders: function () {
             return {
-                torrents: App.Config.getProviderForType('anime')
+                torrents: App.Config.getProviderForType('book')
             };
         },
     });

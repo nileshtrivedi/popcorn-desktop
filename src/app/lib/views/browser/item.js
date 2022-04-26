@@ -239,7 +239,7 @@
             var id = this.model.get(this.model.idAttribute);
 
             var promises = Object.values(providers).map(function (p) {
-              if (realtype === 'show') {
+              if (realtype === 'show' || realtype === 'book') {
                 p = providers.torrent;
               }
                 if (!p.detail) {

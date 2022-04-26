@@ -64,6 +64,7 @@
       App.vent.on('movies:list', _.bind(this.movieTabShow, this));
       App.vent.on('shows:list', _.bind(this.tvshowTabShow, this));
       App.vent.on('anime:list', _.bind(this.animeTabShow, this));
+      App.vent.on('book:list', _.bind(this.bookTabShow, this));
       App.vent.on('favorites:list', _.bind(this.showFavorites, this));
       App.vent.on('favorites:render', _.bind(this.renderFavorites, this));
       App.vent.on('watchlist:list', _.bind(this.showWatchlist, this));
@@ -314,6 +315,7 @@
           case 'Favorites': that.showFavorites(); break;
           case 'TV Series': that.tvshowTabShow(); break;
           case 'Anime': that.animeTabShow(); break;
+          case 'Book': that.bookTabShow(); break;
           case 'Torrent-collection':
             that.movieTabShow(); //needed because Torrentcollection isnt a real collection
             that.showTorrentCollection();
@@ -374,6 +376,13 @@
       this.getRegion('MovieDetail').empty();
 
       this.showChildView('Content', new App.View.AnimeBrowser());
+    },
+
+    bookTabShow: function(e) {
+      this.getRegion('Settings').empty();
+      this.getRegion('MovieDetail').empty();
+
+      this.showChildView('Content', new App.View.BookBrowser());
     },
 
     updateShows: function(e) {

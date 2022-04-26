@@ -18,7 +18,7 @@ class BookApi extends Generic {
   fetch(filters) {
     const params = {
       sort: 'seeds',
-      limit: '50'
+      limit: '500'
     };
 
     if (filters.keywords) {
@@ -34,65 +34,69 @@ class BookApi extends Generic {
       params.sort = filters.sorter;
     }
 
-    const uri = `animes/${filters.page}?` + new URLSearchParams(params);
-    return this._get(0, uri).then(animes => {
-      animes.forEach(anime => {
+    // const uri = `books/${filters.page}?` + new URLSearchParams(params);
+    const uri = '';
+    return this._get(0, uri).then(books => {
+      books.forEach(book => {
         return {
           images: {
-            poster: 'https://media.kitsu.io/anime/poster_images/' + anime._id + '/large.jpg',
-            banner: 'https://media.kitsu.io/anime/cover_images/' + anime._id + '/original.jpg',
-            fanart: 'https://media.kitsu.io/anime/cover_images/' + anime._id + '/original.jpg',
+            poster: 'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1562985482l/40796176._SY475_.jpg',
+            banner: 'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1562985482l/40796176._SY475_.jpg',
+            fanart: 'https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1562985482l/40796176._SY475_.jpg',
           },
-          mal_id: anime._id,
-          haru_id: anime._id,
-          tvdb_id: 'mal-' + anime._id,
-          imdb_id: anime._id,
-          slug: anime.slug,
-          title: anime.title,
-          year: anime.year,
-          type: anime.type,
-          item_data: anime.type,
-          rating: anime.rating
+          mal_id: book._id,
+          haru_id: book._id,
+          tvdb_id: 'mal-' + book._id,
+          imdb_id: book._id,
+          slug: book.slug,
+          title: book.title,
+          year: book.year,
+          type: book.type,
+          item_data: book.type,
+          rating: book.rating
         };
       });
 
-      return { results: sanitize(animes), hasMore: true };
+      return { results: sanitize(books), hasMore: true };
     });
   }
 
+  async getRaw(url) {
+    const response = await fetch(url);
+    if (response.ok) {
+      return await response.json();
+    }
+  }
+
   detail(torrent_id, old_data, debug) {
-    const uri = `anime/${torrent_id}`;
+    const uri = `book/${torrent_id}`;
 
-    return this._get(0, uri).then(anime => {
+    return this.getRaw(`https://api.npoint.io/a896078eda06afe5e3c4`).then(book => {
       var result = {
-        mal_id: anime._id,
-        haru_id: anime._id,
-        tvdb_id: 'mal-' + anime._id,
-        imdb_id: anime._id,
-        slug: anime.slug,
-        title: anime.title,
-        item_data: anime.type,
+        mal_id: book._id,
+        haru_id: book._id,
+        tvdb_id: 'mal-' + book._id,
+        imdb_id: book._id,
+        slug: book.slug,
+        title: book.title,
+        item_data: book.type,
         country: 'Japan',
-        genre: anime.genres,
-        genres: anime.genres,
+        genre: book.genres,
+        genres: book.genres,
         num_seasons: 1,
-        runtime: anime.runtime,
-        status: anime.status,
-        synopsis: anime.synopsis,
+        runtime: book.runtime,
+        status: book.status,
+        synopsis: book.synopsis,
         network: [], //FIXME
-        rating: anime.rating,
+        rating: book.rating,
         images: {
-          poster: 'https://media.kitsu.io/anime/poster_images/' + anime._id + '/large.jpg',
-          banner: 'https://media.kitsu.io/anime/cover_images/' + anime._id + '/original.jpg',
-          fanart: 'https://media.kitsu.io/anime/cover_images/' + anime._id + '/original.jpg',
+          poster: 'https://media.kitsu.io/book/poster_images/' + book._id + '/large.jpg',
+          banner: 'https://media.kitsu.io/book/cover_images/' + book._id + '/original.jpg',
+          fanart: 'https://media.kitsu.io/book/cover_images/' + book._id + '/original.jpg',
         },
-        year: anime.year,
-        type: anime.type
+        year: book.year,
+        type: book.type
       };
-
-      if (anime.type === 'show') {
-        result = Object.extend(result, { episodes: anime.episodes });
-      }
 
       return sanitize(result);
     });
@@ -102,63 +106,23 @@ class BookApi extends Generic {
     const data = {
       genres: [
         'All',
-        'Action',
-        'Adventure',
-        'Cars',
-        'Comedy',
-        'Dementia',
-        'Demons',
-        'Drama',
-        'Ecchi',
-        'Fantasy',
-        'Game',
-        'Harem',
-        'Historical',
-        'Horror',
-        'Josei',
-        'Kids',
-        'Magic',
-        'Martial Arts',
-        'Mecha',
-        'Military',
-        'Music',
-        'Mystery',
-        'Parody',
-        'Police',
-        'Psychological',
-        'Romance',
-        'Samurai',
-        'School',
-        'Sci-Fi',
-        'Seinen',
-        'Shoujo',
-        'Shoujo Ai',
-        'Shounen',
-        'Shounen Ai',
-        'Slice of Life',
-        'Space',
-        'Sports',
-        'Super Power',
-        'Supernatural',
-        'Thriller',
-        'Vampire'
+        'Mathematics',
+        'Physics',
+        'Fiction',
+        'Business',
+        ''
       ],
-      sorters: ['popularity', 'name', 'year'],
-      types: ['All', 'Movies', 'TV', 'OVA', 'ONA']
+      sorters: ['popularity', 'name', 'year']
     };
     let filters = {
       genres: {},
-      sorters: {},
-      types: {},
+      sorters: {}
     };
     for (const genre of data.genres) {
       filters.genres[genre] = i18n.__(genre.capitalizeEach());
     }
     for (const sorter of data.sorters) {
       filters.sorters[sorter] = i18n.__(sorter.capitalizeEach());
-    }
-    for (const type of data.types) {
-      filters.types[type] = i18n.__(type);
     }
 
     return Promise.resolve(filters);

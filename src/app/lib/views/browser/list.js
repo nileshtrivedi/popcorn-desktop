@@ -36,6 +36,7 @@
                 switch (App.currentview) {
                 case 'movies':
                 case 'shows':
+                case 'book':
                 case 'anime':
                     if (Settings.torColSearchMore) {
                         this.ui.onlineSearch.css('visibility', 'visible');
@@ -60,6 +61,7 @@
                 switch (App.currentview) {
                 case 'movies':
                 case 'shows':
+                case 'book':
                 case 'anime':
                     if (Settings.torColSearchMore) {
                         this.ui.onlineSearch.css('visibility', 'visible');
@@ -103,6 +105,7 @@
             switch (App.currentview) {
             case 'movies':
             case 'shows':
+            case 'book':
             case 'anime':
                 if (this.collection.state === 'error') {
                     var errorURL;
@@ -115,6 +118,9 @@
                         break;
                     case 'anime':
                         errorURL = App.Config.getProviderForType('anime')[0].apiURL.slice(0);
+                        break;
+                    case 'book':
+                        errorURL = App.Config.getProviderForType('book')[0].apiURL.slice(0);
                         break;
                     default:
                         errorURL = '';
@@ -384,6 +390,7 @@
             switch (App.currentview) {
             case 'movies':
             case 'shows':
+            case 'book':
             case 'anime':
                 $('#load-more-item').remove();
                 $('#search-more-item').remove();

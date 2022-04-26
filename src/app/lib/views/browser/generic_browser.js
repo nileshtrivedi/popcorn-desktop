@@ -108,6 +108,9 @@
             case 'anime':
                 Settings.OnlineSearchCategory = 'Anime';
                 break;
+            case 'book':
+                Settings.OnlineSearchCategory = 'Book';
+                break;
             default:
             }
 
@@ -126,6 +129,9 @@
                 break;
             case 'anime':
                 curView = '#customAnimeServer';
+                break;
+            case 'book':
+                curView = '#customBookServer';
                 break;
             default:
             }
@@ -149,7 +155,8 @@
                 var tabs = {
                     'TV Series': 'shows',
                     'Movies': 'movies',
-                    'Anime': 'anime'
+                    'Anime': 'anime',
+                    'Book': 'book'
                 };
 
                 if (AdvSettings.get('startScreen') === 'Last Open') {
