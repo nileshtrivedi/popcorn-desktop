@@ -22,7 +22,7 @@
     "test": "gulp test",
     "postinstall": "patch-package"
   },
-  "chromium-args": "--enable-node-worker",
+  "chromium-args": "--enable-node-worker --enable-logging=stderr",
   "engines": {
     "yarn": ">= 1.0.0"
   },
@@ -40,6 +40,7 @@
   "providers": [
     "butter-provider/movie.js",
     "butter-provider/anime.js",
+    "butter-provider/book.js",
     "butter-provider/tv.js",
     "butter-provider/yts.js"
   ],

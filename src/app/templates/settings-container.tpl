@@ -67,6 +67,7 @@
                             Settings.moviesTabEnable ? arr_screens.push("Movies") : null;
                             Settings.seriesTabEnable ? arr_screens.push("TV Series") : null;
                             Settings.animeTabEnable ? arr_screens.push("Anime") : null;
+                            Settings.bookTabEnable ? arr_screens.push("Book") : null;
                             arr_screens.push("Favorites");
                             Settings.activateWatchlist ? arr_screens.push("Watchlist") : null;
                             Settings.activateTorrentCollection ? arr_screens.push("Torrent-collection") : null;
@@ -92,6 +93,9 @@
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <input class="settings-checkbox" name="animeTabEnable" id="animeTabEnable" type="checkbox" <%=(Settings.animeTabEnable? "checked='checked'":"")%>>
                 <label class="settings-label" for="animeTabEnable"><%= i18n.__("Anime") %></label>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <input class="settings-checkbox" name="bookTabEnable" id="bookTabEnable" type="checkbox" <%=(Settings.bookTabEnable? "checked='checked'":"")%>>
+                <label class="settings-label" for="bookTabEnable"><%= i18n.__("Book") %></label>
             </span>
             <span class="advanced">
                 <input class="settings-checkbox" name="coversShowRating" id="coversShowRating" type="checkbox" <%=(Settings.coversShowRating? "checked='checked'":"")%>>
@@ -617,6 +621,22 @@
                            for (var i = 0; i < animeServList.length; ++i) {
                         %>
                         <option value="<%= animeServList[i] %>">
+                        <% } %>
+                    </datalist>
+                    <i class="update-dht fa fa-redo tooltipped" data-toggle="tooltip" data-placement="auto" title="<%= i18n.__("Check for updates") %>"></i>
+                </div>
+            </span>
+            <span>
+                <div class="opensubtitles-options">
+                    <p><%= i18n.__("Book API Server(s)") %></p>
+                    <input type="text" size="61" id="customBookServer" name="customBookServer" list="bookServers" value="<%= Settings.customBookServer ? Settings.customBookServer : (Settings.dhtEnable && Settings.dhtData ? Settings.dhtData.split('server":"')[1].split('","git":"')[0] : Settings.providers.anime.uri[0].split('=')[1]) %>">
+                    <datalist id="bookServers">
+                        <% var bookServList = [Settings.providers.book.uri[0].split('=')[1].replace(/,/g, ',  ')];
+                           Settings.customServers && Settings.customServers.book ? bookServList = bookServList.concat(Settings.customServers.book) : null;
+                           Settings.dhtData ? bookServList = bookServList.concat([Settings.dhtData.split('server":"')[1].split('","git":"')[0].replace(/,/g, ',  ')]) : null;
+                           for (var i = 0; i < bookServList.length; ++i) {
+                        %>
+                        <option value="<%= bookServList[i] %>">
                         <% } %>
                     </datalist>
                     <i class="update-dht fa fa-redo tooltipped" data-toggle="tooltip" data-placement="auto" title="<%= i18n.__("Check for updates") %>"></i>

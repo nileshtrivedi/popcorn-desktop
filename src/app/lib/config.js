@@ -158,7 +158,8 @@
             if (
               (p.name === 'Movies' && !Settings.moviesTabEnable) ||
               (p.name === 'Series' && !Settings.seriesTabEnable) ||
-              (p.name === 'Anime' && !Settings.animeTabEnable)
+              (p.name === 'Anime' && !Settings.animeTabEnable) ||
+              (p.name === 'Book' && !Settings.bookTabEnable)
             ) {
               return false;
             }

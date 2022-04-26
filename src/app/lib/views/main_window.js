@@ -12,6 +12,7 @@
       Header: '#header',
       Content: '#content',
       MovieDetail: '#movie-detail',
+      BookDetail: '#book-detail',
       FileSelector: '#file-selector-container',
       Player: '#player',
       Settings: '#settings-container',
@@ -64,6 +65,7 @@
       App.vent.on('movies:list', _.bind(this.movieTabShow, this));
       App.vent.on('shows:list', _.bind(this.tvshowTabShow, this));
       App.vent.on('anime:list', _.bind(this.animeTabShow, this));
+      App.vent.on('book:list', _.bind(this.bookTabShow, this));
       App.vent.on('favorites:list', _.bind(this.showFavorites, this));
       App.vent.on('favorites:render', _.bind(this.renderFavorites, this));
       App.vent.on('watchlist:list', _.bind(this.showWatchlist, this));
@@ -113,6 +115,13 @@
         'movie:closeDetail',
         _.bind(this.closeMovieDetail, this.getRegion('MovieDetail'))
       );
+
+     // Books
+     App.vent.on('book:showDetail', _.bind(this.showBookDetail, this));
+     App.vent.on(
+       'book:closeDetail',
+       _.bind(this.closeBookDetail, this.getRegion('BookDetail'))
+     );
 
       // Torrent collection
       App.vent.on(
@@ -314,6 +323,7 @@
           case 'Favorites': that.showFavorites(); break;
           case 'TV Series': that.tvshowTabShow(); break;
           case 'Anime': that.animeTabShow(); break;
+          case 'Book': that.bookTabShow(); break;
           case 'Torrent-collection':
             that.movieTabShow(); //needed because Torrentcollection isnt a real collection
             that.showTorrentCollection();
@@ -374,6 +384,13 @@
       this.getRegion('MovieDetail').empty();
 
       this.showChildView('Content', new App.View.AnimeBrowser());
+    },
+
+    bookTabShow: function(e) {
+      this.getRegion('Settings').empty();
+      this.getRegion('MovieDetail').empty();
+
+      this.showChildView('Content', new App.View.BookBrowser());
     },
 
     updateShows: function(e) {
@@ -494,6 +511,20 @@
 
     closeMovieDetail: function(movieModel) {
       _this.getRegion('MovieDetail').empty();
+      App.vent.trigger('shortcuts:list');
+    },
+
+    showBookDetail: function(bookModel) {
+      this.showChildView(
+        'BookDetail',
+        new App.View.BookDetail({
+          model: bookModel
+        })
+      );
+    },
+
+    closeBookDetail: function(bookModel) {
+      _this.getRegion('BookDetail').empty();
       App.vent.trigger('shortcuts:list');
     },
 

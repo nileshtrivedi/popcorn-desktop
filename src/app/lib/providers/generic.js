@@ -5,7 +5,7 @@
 
   App.Providers.Generic = require('butter-provider');
 
-  function updateProviderConnection (moviesServer, seriesServer, animeServer, proxy) {
+  function updateProviderConnection (moviesServer, seriesServer, animeServer, bookServer, proxy) {
     if (moviesServer && moviesServer.includes('://yts')) {
       var MovieBrowser = App.View.PCTBrowser.extend({
         collectionModel: App.Model.MovieCollection,
@@ -17,6 +17,7 @@
     moviesServer ? cache[Object.keys(App.Providers._cache)[0]].setApiUrls(moviesServer) : null;
     seriesServer ? cache[Object.keys(App.Providers._cache)[1]].setApiUrls(seriesServer) : null;
     animeServer ? cache[Object.keys(App.Providers._cache)[2]].setApiUrls(animeServer) : null;
+    bookServer ? cache[Object.keys(App.Providers._cache)[2]].setApiUrls(bookServer) : null;
     for (let provider in cache) {
       cache[provider].proxy = proxy;
     }
